@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A blog about JavaScript Async, Callbacks, Promises, and more">
+  <title>JavaScript Async & More</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Mastering JavaScript Async, Callbacks, Promises.</h1>
+  </header>
+
+  <main>
+    <section class="topic-section">
+      <h2>1. JavaScript Async</h2>
+      <p>JavaScript is single-threaded but uses asynchronous mechanisms to handle multiple tasks concurrently. This allows for non-blocking code execution, particularly useful in tasks like network requests or timers.</p>
+      <pre><code>
+// Example of async operation using setTimeout
+console.log("Start");
+
+setTimeout(() => {
+  console.log("This runs after 2 seconds");
+}, 2000);
+
+console.log("End");
+      </code></pre>
+      <p><strong>When to use async code:</strong></p>
+      <ul>
+        <li>HTTP requests</li>
+        <li>File operations (in Node.js)</li>
+        <li>Timers (setTimeout, setInterval)</li>
+      </ul>
+    </section>
+
+    <section class="topic-section">
+      <h2>2. Callback</h2>
+      <p>A callback is a function passed as an argument to another function, allowing it to be executed later once a task completes. Callbacks are commonly used to handle asynchronous operations.</p>
+      <pre><code>
+// Example of a callback function
+function processUserInput(callback) {
+  let name = prompt("Please enter your name.");
+  callback(name);
+}
+
+function greet(name) {
+  console.log("Hello " + name);
+}
+
+// Using the callback
+processUserInput(greet);
+      </code></pre>
+      <p><strong>Pros and Cons:</strong></p>
+      <ul>
+        <li><strong>Advantage:</strong> Flexible for handling async tasks.</li>
+        <li><strong>Disadvantage:</strong> Can lead to "callback hell" if used excessively.</li>
+      </ul>
+    </section>
+
+    <section class="topic-section">
+      <h2>3. Promise</h2>
+      <p>Promises are objects representing the eventual completion (or failure) of an asynchronous operation. They provide a cleaner way to handle async code compared to callbacks and help manage multiple async operations more effectively.</p>
+      <pre><code>
+// Example of a Promise
+let promise = new Promise(function(resolve, reject) {
+  let success = true;
+
+  if (success) {
+    resolve("Promise resolved!");
+  } else {
+    reject("Promise rejected!");
+  }
+});
+
+promise.then(
+  function(value) { console.log(value); },
+  function(error) { console.log(error); }
+);
+      </code></pre>
+      <p><strong>Advantages:</strong></p>
+      <ul>
+        <li>Prevents callback hell by chaining `.then()` and `.catch()`.</li>
+        <li>Provides better error handling with `.catch()`.</li>
+      </ul>
+    </section>
+
+    <section class="topic-section">
+      <h2>4. Async/Await</h2>
+      <p>Async/await is a syntax for working with Promises that makes asynchronous code look and behave more like synchronous code, thus improving readability and maintainability.</p>
+      <pre><code>
+// Example of async/await
+async function fetchData() {
+  try {
+    let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchData();
+      </code></pre>
+      <p><strong>Advantages:</strong></p>
+      <ul>
+        <li>Code is easier to read and maintain compared to promise chaining.</li>
+        <li>Improves error handling with `try/catch` blocks.</li>
+      </ul>
+    </section>
+
+    <section class="topic-section">
+      <h2>5. Event Loop</h2>
+      <p>The Event Loop is a mechanism that enables JavaScript to perform non-blocking operations, even though JavaScript is single-threaded. It handles the execution of code, processing of events, and execution of queued tasks.</p>
+      <pre><code>
+// Example of the Event Loop
+console.log("First");
+
+setTimeout(() => {
+  console.log("Third");
+}, 0);
+
+console.log("Second");
+      </code></pre>
+      <p><strong>How the Event Loop works:</strong></p>
+      <ul>
+        <li>Manages the call stack and the task queue.</li>
+        <li>Processes tasks from the queue when the call stack is empty.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>JavaScript Concepts Explained | © 2024</p>
+  </footer>
+</body>
+</html>
